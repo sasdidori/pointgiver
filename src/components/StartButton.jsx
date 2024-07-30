@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useContext } from 'react'
+import { GameContext } from '../context/GameContext'
 
-export default function StartButton({ point, setPoint }) {
-	const [clicked, setClicked] = useState(false)
+export default function StartButton({ clicked, setClicked }) {
+	const [game, setGame] = useContext(GameContext)
 	function handleClick() {
 		setClicked(!clicked)
-		//setPoint({ ...point, isGameActive: !clicked })
+		setGame({ ...game, isGameActive: !clicked })
+		//if there is a winner, set things back to the starting state
 	}
 	return (
 		<>

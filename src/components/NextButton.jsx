@@ -1,10 +1,13 @@
+import { useContext } from 'react'
 import { togglePlayers } from '../logic/functions'
+import { GameContext } from '../context/GameContext'
 
-export default function NextButton({ point, setPoint }) {
+export default function NextButton() {
+	const [game, setGame] = useContext(GameContext)
 	function handleClick() {
-		let active = togglePlayers(point)
-		setPoint({ ...point, activePlayer: active})
-		setPoint({...point, round: point.round + 1})
+		const active = togglePlayers(game)
+		setGame({ ...game, activePlayer: active })
+		setGame({ ...game, round: game.round + 1 })
 	}
 	return (
 		<>
