@@ -3,9 +3,9 @@ import Displayer from './components/Displayer'
 import { useState } from 'react'
 import StartButton from './components/StartButton'
 import { GameContext } from './context/GameContext'
+import UseWinner from './effect/UseWinner'
 
 function App() {
-	const [clicked, setClicked] = useState(false)
 	const [game, setGame] = useState({
 		player1: {
 			name: 'player1',
@@ -15,35 +15,36 @@ function App() {
 			name: 'player2',
 			points: 0,
 		},
-		winner: '',
 		activePlayer: 'player1',
-		round: 1,
+		winner: '',
 		isGameActive: false,
 	})
+	const player1Points = game.player1.points
+	const player2Points = game.player2.points
+
 	console.log("active player: ", game.activePlayer);
-	console.log("is game active: ", game.isGameActive);
-	console.log("round: ", game.round);
+	console.log("player1 points: ", game.player1.points);
+	console.log("player2 points: ", game.player2.points);
 	console.log("winner: ", game.winner);
-	console.log("points player1: ", game.player1.points);
-	console.log("points player2: ", game.player2.points);
+	console.log("game status: ", game.isGameActive);
 	console.log("____________");
+
 	return (
 		<>
 			<GameContext.Provider value={[game, setGame]}>
-				{clicked === false ? (
-					<div>
+				{game.isGameActive === false ? (
+					<div className='title' >
 						<h2>GIVE POINTS</h2>
-						<h3>Click to start!</h3>
+						<h3 className='info'>Click to start!</h3>
 					</div>
+				) : player1Points == 3 || player2Points == 3 ? (
+					<UseWinner />
 				) : (
 					<Displayer />
 				)}
 				<br />
 				<br />
-				<StartButton
-					clicked={clicked}
-					setClicked={setClicked}
-				/>
+				<StartButton />
 			</GameContext.Provider>
 		</>
 	)

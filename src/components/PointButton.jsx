@@ -1,9 +1,9 @@
-import { useContext } from 'react'
+import { useContext} from 'react'
 import { GameContext } from '../context/GameContext'
-import { checkWinner } from '../logic/functions'
 
 export default function PointButton() {
 	const [game, setGame] = useContext(GameContext)
+
 	function handleClick() {
 		if (game.activePlayer == 'player1') {
 			setGame({
@@ -16,7 +16,6 @@ export default function PointButton() {
 				player2: { ...game.player2, points: game.player2.points + 1 },
 			})
 		}
-		const winner = checkWinner(game, setGame)
 
 	}
 	return (

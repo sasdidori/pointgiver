@@ -4,10 +4,11 @@ import { GameContext } from '../context/GameContext'
 
 export default function NextButton() {
 	const [game, setGame] = useContext(GameContext)
+
 	function handleClick() {
 		const active = togglePlayers(game)
 		setGame({ ...game, activePlayer: active })
-		setGame({ ...game, round: game.round + 1 })
+	//	setGame({ ...game, round: game.round + 1 })
 	}
 	return (
 		<>
